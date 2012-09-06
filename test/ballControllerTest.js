@@ -1,4 +1,4 @@
-var assert = reqire("assert");
+var assert = require("assert");
 
 describe("ボールコントローラは", function() {
 	var BallController = reqire("../src/ballController");
@@ -13,6 +13,6 @@ describe("ボールコントローラは", function() {
 
 	it("玉のブロックをレーンを指定してを落とすことができる", function() {
 		ballController.createBalls();
-		
+
 	});
 });

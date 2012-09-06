@@ -1,4 +1,4 @@
-var assert = reqire("assert");
+var assert = require("assert");
 
 describe("ボードモデルは", function() {
 	var BoardModel = reqire("../src/boardModel");
