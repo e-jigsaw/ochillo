@@ -1,7 +1,7 @@
 var assert = require("assert");
 
 describe("ボードモデルは", function() {
-	var BoardModel = reqire("../src/boardModel");
+	var BoardModel = require("../src/boardModel");
 	var Black = 0;
 	var White = 1;
 	var Wall  = 9;

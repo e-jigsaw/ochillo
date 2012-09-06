@@ -1,7 +1,7 @@
 var assert = require("assert");
 
 describe("ボールコントローラは", function() {
-	var BallController = reqire("../src/ballController");
+	var BallController = require("../src/ballController");
 
 	var ballController = new BallController();
 
