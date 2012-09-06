@@ -14,7 +14,7 @@ describe("ボードモデルは", function() {
 	});
 
 	it("8x8のマップを持っている", function() {
-		assert.equal(boardModel.state.length, 10);
+		assert.equal(boardModel.state.length, 9);
 		assert.equal(boardModel.state[0].length, 9);
 	});
 

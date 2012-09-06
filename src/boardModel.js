@@ -12,8 +12,12 @@ function boardModel() {
 		for(var i=0; i<=9; i++) {
 			self.state.push([]);
 			for(var j=0; j<=9; j++) {
-				if(j == 0 || j == 9 || i ==9) self.state[i].push(Wall);
-				else self.state[i].push(Empty);
+				if(i == 0) {
+					self.state[i].push(Empty);
+				} else {
+					if(j == 0 || j == 9 || i == 9) self.state[i].push(Wall);
+					else self.state[i].push(Empty);
+				}
 			}
 		}
 	}
