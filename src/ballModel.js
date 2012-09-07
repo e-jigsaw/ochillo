@@ -60,6 +60,19 @@ function ballModel() {
 				break;
 		}
 	}
+
+	this.getCurrentBalls = function() {
+		return self.currentBalls;
+	}
+
+	this.getNextBalls = function() {
+		return self.nextBalls;
+	}
+
+	this.moveNext = function() {
+		self.currentBalls = self.nextBalls;
+		self.nextBalls = self.generateBalls(Math.floor(Math.random() * 5));
+	}
 }
 
 module.exports = ballModel;
