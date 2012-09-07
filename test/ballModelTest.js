@@ -11,7 +11,7 @@ describe("ボールモデルは", function() {
 
 	it("ボールを生成できる", function() {
 		ballModel.generateBalls(0);
-		assert.equal(ballModel.getNextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 1, 0], 
@@ -57,7 +57,7 @@ describe("ボールモデルは", function() {
 	it("カレントのボールを持っている", function() {
 		ballModel.generateBalls(3);
 		ballModel.moveNext();
-		assert.equal(ballModel.getCurrentBalls(), [
+		assert.deepEqual(ballModel.getCurrentBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[0, 1, 1, 0], 
@@ -67,7 +67,7 @@ describe("ボールモデルは", function() {
 
 	it("ネクストのボールを持っている", function() {
 		ballModel.generateBalls(2);
-		assert.equal(ballModel.getNextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
@@ -83,7 +83,7 @@ describe("ボールモデルは", function() {
 	it("カレントのボールをネクストに移せる", function() {
 		ballModel.generateBalls(1);
 		ballModel.moveNext();
-		assert.equal(ballModel.getCurrentBalls(), [
+		assert.deepEqual(ballModel.getCurrentBalls(), [
 			[0, 0, 1, 0], 
 			[0, 0, 1, 0], 
 			[0, 1, 1, 0], 
@@ -95,10 +95,10 @@ describe("ボールモデルは", function() {
 		ballModel.generateBalls(0);
 		ballModel.moveNext();
 		ballModel.rollBalls();
-		assert.equal(ballModel.getCurrentBalls(), [
-			[0, 0, 0, 0], 
-			[0, 0, 1, 0], 
-			[1, 1, 1, 0], 
+		assert.deepEqual(ballModel.getCurrentBalls(), [
+			[0, 0, 0, 0],
+			[1, 1, 1, 0],
+			[0, 0, 1, 0],
 			[0, 0, 0, 0]
 		]);
 	});
