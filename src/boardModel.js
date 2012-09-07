@@ -50,7 +50,6 @@ function boardModel() {
 		// 壁か空なら探索終了
 		// 自分の玉ならひっくり返す
 		queue.push([x, y]);
-		console.log(queue);
 		switch(flg) {
 			case 0:
 				if(     self.get(x-1, y-1) == !ball) arguments.callee(x-1, y-1, ball, 0, queue);
@@ -97,8 +96,6 @@ function boardModel() {
 
 	this.reverseBalls = function(queue, ball) {
 		// キューをひっくり返す処理
-		console.log("hoge");
-		console.log(queue);
 		for(var i in queue) {
 			self.set(queue[i][0], queue[i][1], ball);
 		}
