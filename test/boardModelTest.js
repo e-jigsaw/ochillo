@@ -35,6 +35,6 @@ describe("ボードモデルは", function() {
 		boardModel.set(4, 7, 1);
 		boardModel.set(4, 6, 0);
 		boardModel.check(4, 6, 0);
-		assert.equal(boardModel.state[7][4], Black);
+		assert.equal(boardModel.get(4, 7), Black);
 	});
 });
