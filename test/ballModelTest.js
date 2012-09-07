@@ -11,42 +11,42 @@ describe("ボールモデルは", function() {
 
 	it("ボールを生成できる", function() {
 		ballModel.generateBalls(0);
-		assert.equarl(ballModel.getNextBalls(), [
+		assert.equal(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 1, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(1);
-		assert.equarl(ballModel.getNnextBalls(), [
+		assert.equal(ballModel.getNnextBalls(), [
 			[0, 0, 1, 0], 
 			[0, 0, 1, 0], 
 			[0, 1, 1, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(2);
-		assert.equarl(ballModel.getNnextBalls(), [
+		assert.equal(ballModel.getNnextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0]
 		]);
 		ballModel.generateBalls(3);
-		assert.equarl(ballModel.getNnextBalls(), [
+		assert.equal(ballModel.getNnextBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[0, 1, 1, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(4);
-		assert.equarl(ballModel.getNnextBalls(), [
+		assert.equal(ballModel.getNnextBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[1, 1, 0, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(5);
-		assert.equarl(ballModel.getNnextBalls(), [
+		assert.equal(ballModel.getNnextBalls(), [
 			[0, 0, 0, 0], 
 			[1, 1, 0, 0], 
 			[0, 1, 1, 0], 
@@ -57,7 +57,7 @@ describe("ボールモデルは", function() {
 	it("カレントのボールを持っている", function() {
 		ballModel.generateBalls(3);
 		ballModel.moveNext();
-		assert.equarl(ballModel.getCurrentBalls(), [
+		assert.equal(ballModel.getCurrentBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[0, 1, 1, 0], 
@@ -67,7 +67,7 @@ describe("ボールモデルは", function() {
 
 	it("ネクストのボールを持っている", function() {
 		ballModel.generateBalls(2);
-		assert.equarl(ballModel.getNextBalls(), [
+		assert.equal(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
@@ -76,14 +76,14 @@ describe("ボールモデルは", function() {
 	});
 
 	it("配置用のボードを持っている", function() {
-		assert.equarl(ballModel.currentBoard.length, 10);
-		assert.equarl(ballModel.currentBoard[0].length, 10);
+		assert.equal(ballModel.currentBoard.length, 10);
+		assert.equal(ballModel.currentBoard[0].length, 10);
 	});
 
 	it("カレントのボールをネクストに移せる", function() {
 		ballModel.generateBalls(1);
 		ballModel.moveNext();
-		assert.equarl(ballModel.getCurrentBalls(), [
+		assert.equal(ballModel.getCurrentBalls(), [
 			[0, 0, 1, 0], 
 			[0, 0, 1, 0], 
 			[0, 1, 1, 0], 
@@ -95,7 +95,7 @@ describe("ボールモデルは", function() {
 		ballModel.generateBalls(0);
 		ballModel.moveNext();
 		ballModel.rollBalls();
-		assert.equarl(ballModel.getCurrentBalls(), [
+		assert.equal(ballModel.getCurrentBalls(), [
 			[0, 0, 0, 0], 
 			[0, 0, 1, 0], 
 			[1, 1, 1, 0], 
@@ -107,7 +107,7 @@ describe("ボールモデルは", function() {
 		ballModel.generateBalls(5);
 		ballModel.moveNext();
 		ballModel.dropBalls(4);
-		assert.equarl(ballModel.getCurrentBoard(), [
+		assert.equal(ballModel.getCurrentBoard(), [
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0],
@@ -123,7 +123,7 @@ describe("ボールモデルは", function() {
 		ballModel.generateBalls(4);
 		ballModel.moveNext();
 		ballModel.dropOneBalls(4);
-		assert.equarl(ballModel.getCurrentBoard(), [
+		assert.equal(ballModel.getCurrentBoard(), [
 			[0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 1, 1, 0, 0, 0],
 			[0, 0, 0, 0, 1, 1, 0, 0],
