@@ -65,7 +65,7 @@ describe("ボールモデルは", function() {
 		]);
 	});
 
-	it("ネクストのボールを持っている", {
+	it("ネクストのボールを持っている", function() {
 		ballModel.generateBalls(2);
 		assert.equarl(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 

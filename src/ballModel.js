@@ -51,7 +51,7 @@ function ballModel() {
 				];
 				break;
 			case 5:
-				self.nextBalls ~ [
+				self.nextBalls = [
 					[0, 0, 0, 0],
 					[1, 1, 0, 0],
 					[0, 1, 1, 0],
@@ -62,4 +62,4 @@ function ballModel() {
 	}
 }
 
-module.exports = ballModel();
+module.exports = ballModel;
