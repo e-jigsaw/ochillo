@@ -14,8 +14,8 @@ describe("ボードモデルは", function() {
 	});
 
 	it("8x8のマップを持っている", function() {
-		assert.equal(boardModel.state.length, 9);
-		assert.equal(boardModel.state[0].length, 9);
+		assert.equal(boardModel.state.length, 10);
+		assert.equal(boardModel.state[0].length, 10);
 	});
 
 	it("座標を指定してボードの状態を変更できる", function() {
@@ -31,9 +31,10 @@ describe("ボードモデルは", function() {
 	});
 
 	it("盤面の判定ができる", function() {
-		boardModel.state[8][4] = Black;
-		boardModel.state[7][4] = White;
-		boardModel.check(6, 4, Black);
+		boardModel.set(4, 8, 0);
+		boardModel.set(4, 7, 1);
+		boardModel.set(4, 6, 0);
+		boardModel.check(4, 6, 0);
 		assert.equal(boardModel.state[7][4], Black);
 	});
 });
