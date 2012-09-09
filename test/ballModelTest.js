@@ -18,35 +18,35 @@ describe("ボールモデルは", function() {
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(1);
-		assert.equal(ballModel.getNnextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 0, 1, 0], 
 			[0, 0, 1, 0], 
 			[0, 1, 1, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(2);
-		assert.equal(ballModel.getNnextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0], 
 			[0, 1, 0, 0]
 		]);
 		ballModel.generateBalls(3);
-		assert.equal(ballModel.getNnextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[0, 1, 1, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(4);
-		assert.equal(ballModel.getNnextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 0, 0, 0], 
 			[0, 1, 1, 0], 
 			[1, 1, 0, 0], 
 			[0, 0, 0, 0]
 		]);
 		ballModel.generateBalls(5);
-		assert.equal(ballModel.getNnextBalls(), [
+		assert.deepEqual(ballModel.getNextBalls(), [
 			[0, 0, 0, 0], 
 			[1, 1, 0, 0], 
 			[0, 1, 1, 0], 
