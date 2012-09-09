@@ -80,6 +80,20 @@ describe("ボールモデルは", function() {
 		assert.equal(ballModel.currentBoard[0].length, 10);
 	});
 
+	it("配置用のボードをリセットできる", function() {
+		ballModel.resetCurrentBoard();
+		assert.deepEqual(ballModel.currentBoard, [
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0]
+		]);
+	});
+
 	it("カレントのボールをネクストに移せる", function() {
 		ballModel.generateBalls(1);
 		ballModel.moveNext();
@@ -91,7 +105,7 @@ describe("ボールモデルは", function() {
 		]);
 	});
 
-	it("カレントのボールをカレントのボードに移せる", function() {
+	it("カレントのボールを配置用のボードに移せる", function() {
 		ballModel.generateBalls(1);
 		ballModel.moveNext();
 		ballModel.deployBalls(3, 0);
