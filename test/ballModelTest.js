@@ -91,7 +91,24 @@ describe("ボールモデルは", function() {
 		]);
 	});
 
+	it("カレントのボールをカレントのボードに移せる", function() {
+		ballModel.generateBalls(1);
+		ballmodel.moveNext();
+		ballModel.deployBalls(3, 0);
+		assert.deepEqual.(ballModel.getCurrentBoard(), [
+			[0, 0, 0, 0, 1, 0, 0, 0],
+			[0, 0, 0, 0, 1, 0, 0, 0],
+			[0, 0, 0, 1, 1, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0]
+		]);
+	});
+
 	it("ボールを回転できる", function() {
+		// todo: 衝突判定のテストを書く
 		ballModel.generateBalls(0);
 		ballModel.moveNext();
 		ballModel.rollBalls();
@@ -104,6 +121,7 @@ describe("ボールモデルは", function() {
 	});
 
 	it("ボールを一気に落とせる", function() {
+		// todo: 衝突判定のテストを書く
 		ballModel.generateBalls(5);
 		ballModel.moveNext();
 		ballModel.dropBalls(4);
@@ -120,6 +138,7 @@ describe("ボールモデルは", function() {
 	});
 
 	it("ボールを1段落とすことができる", function() {
+		// todo: 衝突判定のテストを書く
 		ballModel.generateBalls(4);
 		ballModel.moveNext();
 		ballModel.dropOneBalls(4);
