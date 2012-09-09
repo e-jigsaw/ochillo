@@ -2,17 +2,14 @@ function ballModel() {
 	var self = this;
 
 	this.init = function() {
-		for(var i=0; i<10; i++) {
-			self.currentBoard.push([]);
-			for(var j=0; j<10; j++) {
-				self.currentBoard[i].push(0);
-			}
-		}
+		self.resetCurrentBoard();
 	}
 
 	this.currentBalls = [];
 	this.nextBalls = [];
 	this.currentBoard = [];
+	this.currentX = 0;
+	this.currentY = 0;
 
 	this.generateBalls = function(type) {
 		switch(type) {
@@ -71,6 +68,15 @@ function ballModel() {
 		return self.currentBalls;
 	}
 
+	this.resetCurrentBoard = function() {
+		for(var i=0; i<10; i++) {
+			self.currentBoard.push([]);
+			for(var j=0; j<10; j++) {
+				self.currentBoard[i].push(0);
+			}
+		}
+	}
+
 	this.getNextBalls = function() {
 		return self.nextBalls;
 	}
@@ -94,6 +100,16 @@ function ballModel() {
 			}
 		}
 		self.currentBalls = tmpBalls;
+	}
+
+	this.deployBalls = function(x, y) {
+		self.currentX = x;
+		self.currentY = y;
+		for(var i=0; i<self.getCurrentBalls.length; i++) {
+			for(var j=0; j<self.getCurrentBalls[i].length; j++) {
+
+			}
+		}
 	}
 }
 
