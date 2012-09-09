@@ -93,9 +93,9 @@ describe("ボールモデルは", function() {
 
 	it("カレントのボールをカレントのボードに移せる", function() {
 		ballModel.generateBalls(1);
-		ballmodel.moveNext();
+		ballModel.moveNext();
 		ballModel.deployBalls(3, 0);
-		assert.deepEqual.(ballModel.getCurrentBoard(), [
+		assert.deepEqual(ballModel.getCurrentBoard(), [
 			[0, 0, 0, 0, 1, 0, 0, 0],
 			[0, 0, 0, 0, 1, 0, 0, 0],
 			[0, 0, 0, 1, 1, 0, 0, 0],
