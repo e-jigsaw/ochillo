@@ -20,49 +20,49 @@ function ballModel() {
 		switch(type) {
 			case 0:
 				self.nextBalls = [
-					[-1, 1, -1, -1], 
-					[-1, 1, -1, -1], 
-					[-1, 1, 1, -1], 
+					[-1,  1, -1, -1], 
+					[-1,  1, -1, -1], 
+					[-1,  1,  1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 1:
 				self.nextBalls = [
-					[-1, -1, 1, -1], 
-					[-1, -1, 1, -1], 
-					[-1, 1, 1, -1], 
+					[-1, -1,  1, -1], 
+					[-1, -1,  1, -1], 
+					[-1,  1,  1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 2:
 				self.nextBalls = [
-					[-1, 1, -1, -1], 
-					[-1, 1, -1, -1], 
-					[-1, 1, -1, -1], 
-					[-1, 1, -1, -1]
+					[-1,  1, -1, -1], 
+					[-1,  1, -1, -1], 
+					[-1,  1, -1, -1], 
+					[-1,  1, -1, -1]
 				];
 				break;
 			case 3:
 				self.nextBalls = [
+					[-1,  1,  1, -1], 
+					[-1,  1,  1, -1], 
 					[-1, -1, -1, -1], 
-					[-1, 1, 1, -1], 
-					[-1, 1, 1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 4:
 				self.nextBalls = [
+					[-1,  1,  1, -1], 
+					[ 1,  1, -1, -1], 
 					[-1, -1, -1, -1], 
-					[-1, 1, 1, -1], 
-					[1, 1, -1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 5:
 				self.nextBalls = [
+					[ 1,  1, -1, -1],
+					[-1,  1,  1, -1],
 					[-1, -1, -1, -1],
-					[1, 1, -1, -1],
-					[-1, 1, 1, -1],
 					[-1, -1, -1, -1]
 				];
 				break;
@@ -127,9 +127,61 @@ function ballModel() {
 		self.resetCurrentBoard();
 		for(var i=0; i<self.getCurrentBalls().length; i++) {
 			for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
-				self.getCurrentBoard()[j+y][i+x] = self.currentBalls[j][i];
+				if(self.getCurrentBalls()[j][i] != -1) self.getCurrentBoard()[j+y][i+x] = self.getCurrentBalls()[j][i];
 			}
 		}
+	}
+
+	this.dropOneBalls = function(board) {
+		var tmpBoard = [];
+		var tmpY = self.currentY + 1;
+		
+		for(var i=0; i<board.length; i++) {
+			tmpBoard.push([]);
+			for(var j=0; j<board[i].length; j++) {
+				tmpBoard[i].push(-1);
+			}
+		}
+		
+		if(self.getCurrentBoard().length - (tmpY + self.getCurrentBalls().length) > 0) {
+			for(var i=0; i<self.getCurrentBalls().length; i++) {
+				for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
+					tmpBoard[j+tmpY][i+self.currentX] = self.getCurrentBalls()[j][i];
+				}
+			}
+		} else {
+			for(var i=0; i<(self.getCurrentBoard().length - tmpY); i++) {
+				for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
+					tmpBoard[i+tmpY][j+self.currentX] = self.getCurrentBalls()[i][j];
+				}
+			}
+		}
+		
+		var flg = 1;
+		for(var i=0; i<tmpBoard.length; i++) {
+			for(var j=0; j<tmpBoard[i].length; j++) {
+				if(tmpBoard[j][i] != -1 && board[j][i] != -1) flg = 0; 
+			}
+		}
+		if(flg) {
+			self.deployBalls(self.currentX, tmpY);
+			return 1;
+		} else {
+			//self.collisionBalls();
+			return 0;
+		} 
+	}
+
+	this.dropAllBalls = function(board) {
+		var flg = self.dropOneBalls(board);
+		while(1) {
+			if(flg) flg = self.dropOneBalls(board);
+			else break;
+		}
+	}
+
+	this.collisionBalls = function(board) {
+
 	}
 }
 
