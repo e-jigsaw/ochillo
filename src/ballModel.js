@@ -167,7 +167,7 @@ function ballModel() {
 			self.deployBalls(self.currentX, tmpY);
 			return 1;
 		} else {
-			//self.collisionBalls();
+			self.collisionBalls(board);
 			return 0;
 		} 
 	}
@@ -181,7 +181,23 @@ function ballModel() {
 	}
 
 	this.collisionBalls = function(board) {
-
+		var flg = 0;
+		for(var i=0; i<board.length; i++) {
+			for(var j=0; j<board[i].length; j++) {
+				if(board[i][j] != -1) self.currentBoard[i][j] = board[i][j];
+			}
+		}
+		while(1) {
+			for(var i=self.getCurrentBoard().length-2; i>=0; i--) {
+				for(var j=0; j<self.getCurrentBoard()[i].length; j++) {
+					if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i+1][j] == -1) {
+						self.getCurrentBoard()[i+1][j] = self.getCurrentBoard()[i][j];
+						self.getCurrentBoard()[i][j] = -1;
+					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) flg += 1; 
+				}
+			}
+			if(flg >= 4) break;
+		}
 	}
 }
 
