@@ -20,51 +20,61 @@ function ballModel() {
 
 	this.generateBalls = function(type) {
 		// 引数に応じて落とすボール群を生成する
+		var temprate = [
+			[1, 1, 0, 0],
+			[1, 0, 1, 0],
+			[0, 1, 1, 0],
+			[0, 1, 0, 1],
+			[0, 0, 1, 1],
+			[1, 0, 0, 1]
+		];
+		var randomNum = Math.floor(Math.random() * 6);
+
 		switch(type) {
 			case 0:
 				self.nextBalls = [
-					[-1,  1, -1, -1], 
-					[-1,  1, -1, -1], 
-					[-1,  1,  1, -1], 
+					[-1,  temprate[randomNum][0], -1, -1], 
+					[-1,  temprate[randomNum][1], -1, -1], 
+					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 1:
 				self.nextBalls = [
-					[-1, -1,  1, -1], 
-					[-1, -1,  1, -1], 
-					[-1,  1,  1, -1], 
+					[-1, -1,  temprate[randomNum][0], -1], 
+					[-1, -1,  temprate[randomNum][1], -1], 
+					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 2:
 				self.nextBalls = [
-					[-1,  1, -1, -1], 
-					[-1,  1, -1, -1], 
-					[-1,  1, -1, -1], 
-					[-1,  1, -1, -1]
+					[-1,  temprate[randomNum][0], -1, -1], 
+					[-1,  temprate[randomNum][1], -1, -1], 
+					[-1,  temprate[randomNum][2], -1, -1], 
+					[-1,  temprate[randomNum][3], -1, -1]
 				];
 				break;
 			case 3:
 				self.nextBalls = [
-					[-1,  1,  1, -1], 
-					[-1,  1,  1, -1], 
+					[-1,  temprate[randomNum][0],  temprate[randomNum][1], -1], 
+					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1], 
 					[-1, -1, -1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 4:
 				self.nextBalls = [
-					[-1,  1,  1, -1], 
-					[ 1,  1, -1, -1], 
+					[-1,  temprate[randomNum][0],  temprate[randomNum][1], -1], 
+					[ temprate[randomNum][2],  temprate[randomNum][3], -1, -1], 
 					[-1, -1, -1, -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
 			case 5:
 				self.nextBalls = [
-					[ 1,  1, -1, -1],
-					[-1,  1,  1, -1],
+					[ temprate[randomNum][0],  temprate[randomNum][1], -1, -1],
+					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1],
 					[-1, -1, -1, -1],
 					[-1, -1, -1, -1]
 				];
