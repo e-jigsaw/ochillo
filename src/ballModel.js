@@ -138,14 +138,47 @@ function ballModel() {
 		}
 	}
 
-	this.moveRight = function() {
+	this.moveRight = function(board) {
 		// 左に動かす処理
-		return self.deployBalls(self.currentX+1, self.currentY);
+		return self.move(board, self.currentX+1, self.currentY);
 	}
 
-	this.moveLeft = function() {
+	this.moveLeft = function(board) {
 		// 右に動かす処理
-		return self.deployBalls(self.currentX-1; self.currentY);
+		return self.move(board, self.currentX-1, self.currentY);
+	}
+
+	this.move = function(board, x, y) {
+		var tmpBoard = [];
+		// メソッド内の仮ボードの初期化
+		for(var i=0; i<board.length; i++) {
+			tmpBoard.push([]);
+			for(var j=0; j<board[i].length; j++) {
+				tmpBoard[i].push(-1);
+			}
+		}
+
+		// メソッド内仮ボードに現在のボール群を移す
+		for(var i=0; i<self.getCurrentBalls().length; i++) {
+			for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
+				if(self.getCurrentBalls()[j][i] != -1) tmpBoard[j+y][i+x] = self.getCurrentBalls()[j][i];
+			}
+		}
+
+		var flg = 1;
+		for(var i=0; i<tmpBoard.length; i++) {
+			for(var j=0; j<tmpBoard[i].length; j++) {
+				if(tmpBoard[j][i] != -1 && board[j][i] != -1) flg = 0;
+			}
+		}
+
+		// もし衝突がなかったらデプロイ業
+		if(flg) {
+			self.deployBalls(x, y);
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 	this.deployBalls = function(x, y) {
@@ -153,6 +186,7 @@ function ballModel() {
 		self.currentX = x;
 		self.currentY = y;
 		self.resetCurrentBoard();
+
 		for(var i=0; i<self.getCurrentBalls().length; i++) {
 			for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
 				if(self.getCurrentBalls()[j][i] != -1) self.getCurrentBoard()[j+y][i+x] = self.getCurrentBalls()[j][i];
