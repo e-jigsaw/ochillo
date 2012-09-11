@@ -118,7 +118,20 @@ function ballModel() {
 			}
 		}
 
-		if(flg) self.currentBalls = tmpBalls;
+		if(flg) {
+			self.currentBalls = tmpBalls;
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	this.moveRight = function() {
+		return self.deployBalls(self.currentX+1, self.currentY);
+	}
+
+	this.moveLeft = function() {
+		return self.deployBalls(self.currentX-1; self.currentY);
 	}
 
 	this.deployBalls = function(x, y) {
