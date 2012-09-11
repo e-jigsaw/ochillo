@@ -23,17 +23,8 @@ $(document).ready(function() {
 
 function display(board) {
 	for(var i=0; i<board.length; i++) {
-		
+		for(var j=0; j<board.length; j++) {
+			
+		}
 	}
-}
-
-function returnStr(board) {
-	var str = "";
-	for(var i=0; i<board.length; i++) {
-		if(board[i] == Black) str += "●";
-		else if(board[i] == White) str += "○";
-		else if(board[i] == Wall) str += "■";
-		else str += " ";
-	}
-	return str;
 }
