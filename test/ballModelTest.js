@@ -10,48 +10,20 @@ describe("ボールモデルは", function() {
 	});
 
 	it("ボールを生成できる", function() {
-		ballModel.generateBalls(0);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[-1,  1, -1, -1], 
-			[-1,  1, -1, -1], 
-			[-1,  1,  1, -1], 
-			[-1, -1, -1, -1]
-		]);
-		ballModel.generateBalls(1);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[-1, -1,  1, -1], 
-			[-1, -1,  1, -1], 
-			[-1,  1,  1, -1], 
-			[-1, -1, -1, -1]
-		]);
-		ballModel.generateBalls(2);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[-1,  1, -1, -1], 
-			[-1,  1, -1, -1], 
-			[-1,  1, -1, -1], 
-			[-1,  1, -1, -1]
-		]);
-		ballModel.generateBalls(3);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[-1,  1,  1, -1], 
-			[-1,  1,  1, -1], 
-			[-1, -1, -1, -1], 
-			[-1, -1, -1, -1]
-		]);
-		ballModel.generateBalls(4);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[-1,  1,  1, -1], 
-			[ 1,  1, -1, -1], 
-			[-1, -1, -1, -1], 
-			[-1, -1, -1, -1]
-		]);
-		ballModel.generateBalls(5);
-		assert.deepEqual(ballModel.getNextBalls(), [
-			[ 1,  1, -1, -1], 
-			[-1,  1,  1, -1], 
-			[-1, -1, -1, -1], 
-			[-1, -1, -1, -1]
-		]);
+		for(var i=0; i<6; i++) {
+			ballModel.generateBalls(i);
+			var black=0, white=0;
+			for(var j=0; j<ballModel.getNextBalls().length; j++) {
+				for(var t=0; t<ballModel.getNextBalls()[j].length; t++) {
+					if(ballModel.getNextBalls()[j][t] == 1) {
+						black += 1;
+					}
+					else if(ballModel.getNextBalls()[j][t] == 0) white += 1;
+				}
+			}
+			assert.equal(black, 2);
+			assert.equal(white, 2);
+		}
 	});
 
 	it("カレントのボールを持っている", function() {
