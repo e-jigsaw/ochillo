@@ -25,11 +25,15 @@ function boardModel() {
 	}
 
 	this.set = function(x, y, ball) {
+		// 指定座標にボールをセットする
 		self.state[y][x] = ball;
 	}
 
 	this.get = function(x, y) {
-		return self.state[y][x];
+		// 指定された座標の玉を返す
+		// 何も引数がなかったら全体を返す
+		if(x === undefined && y === undefined) return self.state;
+		else return self.state[y][x];
 	}
 
 	this.check = function(x, y, ball) {
@@ -99,6 +103,28 @@ function boardModel() {
 		for(var i in queue) {
 			self.set(queue[i][0], queue[i][1], ball);
 		}
+	}
+
+	this.countWhite = function() {
+		// 白の個数を返す
+		return self.count(White);
+	}
+
+	this.countBlack = function() {
+		// 黒の個数を返す
+		return self.count(Black);
+	}
+
+	this.count = function(type) {
+		// 指定された色の玉数を数える
+		// ユーティリティ用
+		var count = 0;
+		for(var i=0; i<self.get().length; i++) {
+			for(var j=0; j<self.get()[i].length; j++) {
+				if(self.get()[i][j] == type) count += 1;
+			}
+		}
+		return count;
 	}
 }
 
