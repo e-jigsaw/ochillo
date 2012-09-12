@@ -109,7 +109,7 @@ function ballModel() {
 	this.moveNext = function() {
 		// 次のボールを現在のボールに移し、それを仮ボードに反映させる
 		self.currentBalls = self.nextBalls;
-		self.nextBalls = self.generateBalls(Math.floor(Math.random() * 5));
+		self.generateBalls(Math.floor(Math.random() * 5));
 		self.deployBalls(3, 0);
 	}
 
