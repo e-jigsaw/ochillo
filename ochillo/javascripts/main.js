@@ -20,7 +20,10 @@ $(document).ready(function() {
 			case 40: // down key down
 				var flg = ball.dropOneBalls(board.get());
 				display(ball.getCurrentBoard(), board.get());
-				if(!flg) turn(ball, board);
+				if(!flg) {
+					console.log(ball.getCurrentBoard());
+					//turn(ball, board);
+				}
 				break;
 		}
 	});

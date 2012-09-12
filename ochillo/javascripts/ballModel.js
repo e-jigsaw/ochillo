@@ -197,7 +197,6 @@ function ballModel() {
 		self.currentX = x;
 		self.currentY = y;
 		self.resetCurrentBoard();
-		console.log(self.getCurrentBalls());
 		for(var i=0; i<self.getCurrentBalls().length; i++) {
 			for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
 				if(self.getCurrentBalls()[j][i] != -1) self.getCurrentBoard()[j+y][i+x] = self.getCurrentBalls()[j][i];
