@@ -1,25 +1,33 @@
+body {
+	background: #AAA;
+}
+
+#board {
+
+}
+
 .col {
 	width: 48px;
 	height: 48px;
+	float: left;
 }
 
 .row {
-	width: 48px;
-	height: 48px;
+	width: 500px;
 }
 
 .wall {
-	
+	background: #960;
 }
 
 .black {
-	
+	background: #222;
 }
 
 .white {
-	
+	background: #EEE;
 }
 
 .empty {
-	
+	background: #CCC;
 }
