@@ -26,7 +26,13 @@ function boardModel() {
 
 	this.set = function(x, y, ball) {
 		// 指定座標にボールをセットする
-		self.state[y][x] = ball;
+		if(y === undefined && ball === undefined) {
+			for(var i=0; i<x.length; i++) {
+				for(var j=0; j<x[i].length; j++) {
+					arguments.callee(i, j, x[j][i]);
+				}
+			}
+		} else self.state[y][x] = ball;
 	}
 
 	this.get = function(x, y) {
