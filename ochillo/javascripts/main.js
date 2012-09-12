@@ -21,8 +21,8 @@ $(document).ready(function() {
 				var flg = ball.dropOneBalls(board.get());
 				display(ball.getCurrentBoard(), board.get());
 				if(!flg) {
-					console.log(ball.getCurrentBoard());
-					//turn(ball, board);
+					board.set(ball.getCurrentBoard());
+					turn(ball, board);
 				}
 				break;
 		}
