@@ -143,6 +143,7 @@ function ballModel() {
 
 		if(flg) {
 			self.currentBalls = tmpBalls;
+			self.deployBalls(self.currentX, self.currentY);
 			return 1;
 		} else {
 			return 0;
@@ -247,8 +248,7 @@ function ballModel() {
 			self.deployBalls(self.currentX, tmpY);
 			return 1;
 		} else {
-			self.collisionBalls(board);
-			return 0;
+			return self.collisionBalls(board);
 		} 
 	}
 
@@ -266,6 +266,7 @@ function ballModel() {
 	this.collisionBalls = function(board) {
 		// 衝突ルーチン
 		var flg = 0;
+		var queue = [];
 
 		// 仮ボードにマスターボードの状態を反映させる
 		for(var i=0; i<board.length; i++) {
@@ -281,10 +282,14 @@ function ballModel() {
 					if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i+1][j] == -1) {
 						self.getCurrentBoard()[i+1][j] = self.getCurrentBoard()[i][j];
 						self.getCurrentBoard()[i][j] = -1;
-					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) flg += 1; 
+					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) {
+						flg += 1;
+						queue.push([i, j]);
+					} 
 				}
 			}
 			if(flg >= 4) break;
 		}
+		return queue;
 	}
 }

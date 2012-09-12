@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var ball = new ballModel();
 	var board = new boardModel();
+	var player = Black;
 
 	ball.init();
 	board.init();
@@ -19,12 +20,21 @@ $(document).ready(function() {
 				break;
 			case 40: // down key down
 				var flg = ball.dropOneBalls(board.get());
-				display(ball.getCurrentBoard(), board.get());
-				if(!flg) {
+				console.log(player);
+				if(flg != 1) {
 					board.set(ball.getCurrentBoard());
+					for(var i=0; i<flg.length; i++) {
+						board.check(flg[i][1], flg[i][0], player);
+					}
+					if(player == Black) player = White;
+					else player = Black;
 					turn(ball, board);
 				}
+				display(ball.getCurrentBoard(), board.get());
 				break;
+			case 38: // up key down
+				ball.rollBalls(board.get());
+				display(ball.getCurrentBoard(), board.get());
 		}
 	});
 
