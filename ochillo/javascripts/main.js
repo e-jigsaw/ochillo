@@ -20,11 +20,12 @@ $(document).ready(function() {
 				break;
 			case 40: // down key down
 				var flg = ball.dropOneBalls(board.get());
-				console.log(player);
 				if(flg != 1) {
 					board.set(ball.getCurrentBoard());
 					for(var i=0; i<flg.length; i++) {
-						board.check(flg[i][1], flg[i][0], player);
+						if(board.get()[flg[i][0]][flg[i][1]] == player) {
+							board.check(flg[i][1], flg[i][0], player);
+						} 
 					}
 					if(player == Black) player = White;
 					else player = Black;
