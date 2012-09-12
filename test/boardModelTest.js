@@ -31,10 +31,27 @@ describe("ボードモデルは", function() {
 	});
 
 	it("盤面の判定ができる", function() {
-		boardModel.set(4, 8, 0);
-		boardModel.set(4, 7, 1);
-		boardModel.set(4, 6, 0);
-		boardModel.check(4, 6, 0);
+		boardModel.set(4, 8, Black);
+		boardModel.set(4, 7, White);
+		boardModel.set(4, 6, Black);
+		boardModel.check(4, 6, Black);
 		assert.equal(boardModel.get(4, 7), Black);
+	});
+
+	it("白の個数を数えられる", function() {
+		boardModel.set(4, 8, Black);
+		boardModel.set(4, 7, White);
+		boardModel.set(4, 6, White);
+		boardModel.set(4, 5, White);
+		assert.equal(boardModel.countWhite(), 3);
+	});
+
+	it("黒の個数を数えられる", function() {
+		boardModel.set(2, 2, -1);
+		boardModel.set(4, 8, White);
+		boardModel.set(4, 7, Black);
+		boardModel.set(4, 6, Black);
+		boardModel.set(4, 5, Black);
+		assert.equal(boardModel.countBlack(), 3);
 	});
 });
