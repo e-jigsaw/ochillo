@@ -57,9 +57,9 @@ function ballModel() {
 				break;
 			case 3:
 				self.nextBalls = [
-					[-1,  temprate[randomNum][0],  temprate[randomNum][1], -1], 
-					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1], 
 					[-1, -1, -1, -1], 
+					[-1,  temprate[randomNum][2],  temprate[randomNum][3], -1], 
+					[-1,  temprate[randomNum][0],  temprate[randomNum][1], -1], 
 					[-1, -1, -1, -1]
 				];
 				break;
@@ -277,7 +277,7 @@ function ballModel() {
 				}
 			}
 		}
-
+		
 		// 仮ボードにマスターボードの状態を反映させる
 		for(var i=0; i<board.length; i++) {
 			for(var j=0; j<board[i].length; j++) {
@@ -290,7 +290,6 @@ function ballModel() {
 		for(var i=queue.length-1; i>=0; i--) {
 			var flg = false;
 			while(1) {
-				console.log(queue, self.getCurrentBoard()[queue[i][0]+1][queue[i][1]]);
 				if(self.getCurrentBoard()[queue[i][0]+1][queue[i][1]] == -1) {
 					self.getCurrentBoard()[queue[i][0]+1][queue[i][1]] = self.getCurrentBoard()[queue[i][0]][queue[i][1]];
 					self.getCurrentBoard()[queue[i][0]][queue[i][1]] = -1;

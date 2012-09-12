@@ -22,11 +22,13 @@ $(document).ready(function() {
 				var flg = ball.dropOneBalls(board.get());
 				if(flg != 1) {
 					board.set(ball.getCurrentBoard());
+					var queue = [];
 					for(var i=0; i<flg.length; i++) {
 						if(board.get()[flg[i][0]][flg[i][1]] == player) {
-							board.check(flg[i][1], flg[i][0], player);
+							queue.push(flg[i]);
 						} 
 					}
+					board.check(queue, player);
 					if(player == Black) player = White;
 					else player = Black;
 					turn(ball, board);
@@ -40,6 +42,7 @@ $(document).ready(function() {
 	});
 
 	ball.generateBalls(Math.floor(Math.random() * 5));
+	//ball.generateBalls(2);
 	turn(ball, board);
 });
 
