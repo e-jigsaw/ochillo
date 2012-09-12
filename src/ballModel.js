@@ -269,6 +269,15 @@ function ballModel() {
 		var flg = 0;
 		var queue = [];
 
+		// 落ちるキューをつくる
+		for(var i=0; i<self.getCurrentBoard().length; i++) {
+			for(var j=0; j<self.getCurrentBoard()[i].length; j++) {
+				if(self.getCurrentBoard()[i][j] != -1) {
+					queue.push([i, j]);
+				}
+			}
+		}
+
 		// 仮ボードにマスターボードの状態を反映させる
 		for(var i=0; i<board.length; i++) {
 			for(var j=0; j<board[i].length; j++) {
@@ -276,21 +285,22 @@ function ballModel() {
 			}
 		}
 
-		// 4つ全てのボールが空以外になるまで繰り返す
-		while(1) {
-			for(var i=self.getCurrentBoard().length-2; i>=0; i--) {
-				for(var j=0; j<self.getCurrentBoard()[i].length; j++) {
-					if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i+1][j] == -1) {
-						self.getCurrentBoard()[i+1][j] = self.getCurrentBoard()[i][j];
-						self.getCurrentBoard()[i][j] = -1;
-					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) {
-						flg += 1;
-						queue.push([i, j]);
-					} 
-				}
+		// キューを参照して4つ全てのボールが空以外になるまで繰り返す
+		// キューを更新する
+		for(var i=queue.length-1; i>=0; i--) {
+			var flg = false;
+			while(1) {
+				console.log(queue, self.getCurrentBoard()[queue[i][0]+1][queue[i][1]]);
+				if(self.getCurrentBoard()[queue[i][0]+1][queue[i][1]] == -1) {
+					self.getCurrentBoard()[queue[i][0]+1][queue[i][1]] = self.getCurrentBoard()[queue[i][0]][queue[i][1]];
+					self.getCurrentBoard()[queue[i][0]][queue[i][1]] = -1;
+					queue[i][0] += 1;
+				} else flg = !flg;
+				if(flg) break;
 			}
-			if(flg >= 4) break;
+			
 		}
+
 		return queue;
 	}
 }

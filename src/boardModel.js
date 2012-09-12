@@ -62,42 +62,42 @@ function boardModel() {
 		queue.push([x, y]);
 		switch(flg) {
 			case 0:
-				if(     self.get(x-1, y-1) == !ball) arguments.callee(x-1, y-1, ball, 0, queue);
+				if(     self.get(x-1, y-1) == !ball) arguments.callee(x-1, y-1, ball, flg, queue);
 				else if(self.get(x-1, y-1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 1:
-				if(     self.get(x,   y-1) == !ball) arguments.callee(x,   y-1, ball, 1, queue);
+				if(     self.get(x,   y-1) == !ball) arguments.callee(x,   y-1, ball, flg, queue);
 				else if(self.get(x,   y-1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 2:
-				if(     self.get(x+1, y-1) == !ball) arguments.callee(x+1, y-1, ball, 2, queue);
+				if(     self.get(x+1, y-1) == !ball) arguments.callee(x+1, y-1, ball, flg, queue);
 				else if(self.get(x+1, y-1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 3:
-				if(     self.get(x-1, y  ) == !ball) arguments.callee(x-1, y  , ball, 3, queue);
-				else if(self.get(x-1, y-1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x-1, y  ) == !ball) arguments.callee(x-1, y  , ball, flg, queue);
+				else if(self.get(x-1, y  ) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 4:
-				if(     self.get(x+1, y  ) == !ball) arguments.callee(x+1, y  , ball, 4, queue);
+				if(     self.get(x+1, y  ) == !ball) arguments.callee(x+1, y  , ball, flg, queue);
 				else if(self.get(x+1, y  ) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 5:
-				if(     self.get(x-1, y+1) == !ball) arguments.callee(x-1, y+1, ball, 5, queue);
+				if(     self.get(x-1, y+1) == !ball) arguments.callee(x-1, y+1, ball, flg, queue);
 				else if(self.get(x-1, y+1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 6:
-				if(     self.get(x,   y+1) == !ball) arguments.callee(x,   y+1, ball, 6, queue);
+				if(     self.get(x,   y+1) == !ball) arguments.callee(x,   y+1, ball, flg, queue);
 				else if(self.get(x,   y+1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
 			case 7:
-				if(     self.get(x+1, y+1) == !ball) arguments.callee(x-1, y-1, ball, 7, queue);
+				if(     self.get(x+1, y+1) == !ball) arguments.callee(x-1, y-1, ball, flg, queue);
 				else if(self.get(x+1, y+1) == ball)  self.reverseBalls(queue, ball);
 				else return 0;
 				break;
