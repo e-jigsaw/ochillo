@@ -128,9 +128,10 @@ function ballModel() {
 		}
 		
 		// メソッド内の仮ボードに回転した状態のボール群を反映させる
+		var table = [3, 2, 1, 0];
 		for(var i=0; i<self.currentBalls.length; i++) {	
 			for(var j=0; j<self.currentBalls[i].length; j++) {
-				tmpBalls[i][j] = self.currentBalls[j][i];
+				tmpBalls[i][j] = self.currentBalls[table[j]][i];
 			}
 		}
 		
