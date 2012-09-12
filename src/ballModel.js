@@ -110,6 +110,7 @@ function ballModel() {
 		// 次のボールを現在のボールに移し、それを仮ボードに反映させる
 		self.currentBalls = self.nextBalls;
 		self.generateBalls(Math.floor(Math.random() * 5));
+
 		self.deployBalls(3, 0);
 	}
 
@@ -127,9 +128,10 @@ function ballModel() {
 		}
 		
 		// メソッド内の仮ボードに回転した状態のボール群を反映させる
+		var table = [3, 2, 1, 0];
 		for(var i=0; i<self.currentBalls.length; i++) {	
 			for(var j=0; j<self.currentBalls[i].length; j++) {
-				tmpBalls[i][j] = self.currentBalls[j][i];
+				tmpBalls[i][j] = self.currentBalls[table[j]][i];
 			}
 		}
 		
@@ -142,6 +144,7 @@ function ballModel() {
 
 		if(flg) {
 			self.currentBalls = tmpBalls;
+			self.deployBalls(self.currentX, self.currentY);
 			return 1;
 		} else {
 			return 0;
@@ -196,7 +199,6 @@ function ballModel() {
 		self.currentX = x;
 		self.currentY = y;
 		self.resetCurrentBoard();
-
 		for(var i=0; i<self.getCurrentBalls().length; i++) {
 			for(var j=0; j<self.getCurrentBalls()[i].length; j++) {
 				if(self.getCurrentBalls()[j][i] != -1) self.getCurrentBoard()[j+y][i+x] = self.getCurrentBalls()[j][i];
@@ -247,8 +249,7 @@ function ballModel() {
 			self.deployBalls(self.currentX, tmpY);
 			return 1;
 		} else {
-			self.collisionBalls(board);
-			return 0;
+			return self.collisionBalls(board);
 		} 
 	}
 
@@ -266,6 +267,7 @@ function ballModel() {
 	this.collisionBalls = function(board) {
 		// 衝突ルーチン
 		var flg = 0;
+		var queue = [];
 
 		// 仮ボードにマスターボードの状態を反映させる
 		for(var i=0; i<board.length; i++) {
@@ -281,11 +283,15 @@ function ballModel() {
 					if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i+1][j] == -1) {
 						self.getCurrentBoard()[i+1][j] = self.getCurrentBoard()[i][j];
 						self.getCurrentBoard()[i][j] = -1;
-					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) flg += 1; 
+					} else if(self.getCurrentBoard()[i][j] != -1 && self.getCurrentBoard()[i][j] != 9 && self.getCurrentBoard()[i+1][j] != -1) {
+						flg += 1;
+						queue.push([i, j]);
+					} 
 				}
 			}
 			if(flg >= 4) break;
 		}
+		return queue;
 	}
 }
 
