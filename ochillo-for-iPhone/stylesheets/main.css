@@ -1,0 +1,63 @@
+body {
+	background: #AAA;
+}
+
+#board {
+
+}
+
+.col {
+	width: 96px;
+	height: 96px;
+	float: left;
+}
+
+.row {
+	width: 1000px;
+}
+
+.wall {
+	background: #960;
+}
+
+.black {
+	background: #222;
+}
+
+.white {
+	background: #EEE;
+}
+
+.empty {
+	background: #CCC;
+}
+
+#score {
+	font-size: 256px;
+}
+
+#blackScore {
+	color: #222;
+	float: left;
+}
+
+#whiteScore {
+	color: #EEE;
+	float: left;
+}
+
+#currentColor {
+	float: left;
+}
+
+.nonVisible {
+	display: none;
+}
+
+.blackTurn {
+	color: #222;
+}
+
+.whiteTurn {
+	color: #EEE;
+}
