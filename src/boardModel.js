@@ -7,6 +7,7 @@ function boardModel() {
 	var self = this;
 
 	this.state = []; // ボードの状態配列
+	this.currentPlayer = Black;
 
 	this.init = function() {
 		// ボードの状態初期化
@@ -42,8 +43,9 @@ function boardModel() {
 		else return self.state[y][x];
 	}
 
-	this.check = function(queue, ball) {
+	this.check = function(queue) {
 		var fullQueue = [];
+		var ball = self.getCurrentPlayer();
 		for(var i=0; i<queue.length; i++) {
 			// 8方向に探索、同じもしくは空、壁だったら探索終了
 			if(self.get(queue[i][1]-1, queue[i][0]-1) == !ball) fullQueue.push(self.searchBalls(queue[i][1]-1, queue[i][0]-1, ball, 0, []));
@@ -62,10 +64,7 @@ function boardModel() {
 		// もし違う玉が続いていたら探索続行
 		// 壁か空なら探索終了
 		// 自分の玉ならひっくり返す
-
-		// todo: return queue の条件判定文がおかしいとおもう
 		queue.push([x, y]);
-		console.log(x, y, queue);
 		switch(flg) {
 			case 0:
 				if(     self.get(x-1, y-1) == !ball) return arguments.callee(x-1, y-1, ball, flg, queue);
@@ -112,7 +111,6 @@ function boardModel() {
 
 	this.reverseBalls = function(queue, ball) {
 		// キューをひっくり返す処理
-		console.log(queue);
 		for(var i=0; i<queue.length; i++) {
 			for(var j=0; j<queue[i].length; j++) {
 				self.set(queue[i][j][0], queue[i][j][1], ball);
@@ -140,6 +138,16 @@ function boardModel() {
 			}
 		}
 		return count;
+	}
+
+	this.getCurrentPlayer = function() {
+		return self.currentPlayer;
+	}
+
+	this.changeCurrentPlayer = function() {
+		if(self.getCurrentPlayer() == Black) self.currentPlayer = White;
+		else self.currentPlayer = Black;
+		return 1;
 	}
 }
 
