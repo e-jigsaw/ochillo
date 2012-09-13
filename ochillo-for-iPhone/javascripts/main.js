@@ -17,30 +17,22 @@ $(document).ready(function() {
 			display(ball.getCurrentBoard(), board.get());
 		},
      	wipeUp:   function() { // !!!DOWN!!! swipe
-     		var flg = ball.dropOneBalls(board.get());
-			if(flg != 1) {
-				board.set(ball.getCurrentBoard());
-				var queue = [];
-				for(var i=0; i<flg.length; i++) {
-					if(board.get()[flg[i][0]][flg[i][1]] == player) {
-						queue.push(flg[i]);
-					} 
-				}
-				board.check(queue, player);
-				if(player == Black) player = White;
-				else player = Black;
-				turn(ball, board, player);
-			}
-			display(ball.getCurrentBoard(), board.get());
+     		fall(ball, board, player);
      	},
      	wipeDown: function() {  // !!!UP!!! swipe
      		ball.rollBalls(board.get());
 			display(ball.getCurrentBoard(), board.get());
      	}
+	}).on("touchstart", function(e) {
+		e.preventDefault();
+	}).on("dblTap", function(e) {
+		e.preventDefault();
+		alert("dblTap!");
 	});
 
 	ball.generateBalls(Math.floor(Math.random() * 5));
 	turn(ball, board, player);
+	fallEachTime(ball, board, player);
 });
 
 function init(board) {
@@ -62,6 +54,34 @@ function turn(ball, board, player) {
 	ball.moveNext();
 	display(ball.getCurrentBoard(), board.get());
 	displayScore(board, player);
+}
+
+function fall(ball, board, player) {
+	var flg = ball.dropOneBalls(board.get());
+	if(flg != 1) {
+		board.set(ball.getCurrentBoard());
+		var queue = [];
+		for(var i=0; i<flg.length; i++) {
+			if(board.get()[flg[i][0]][flg[i][1]] == player) {
+				queue.push(flg[i]);
+			} 
+		}
+		board.check(queue, player);
+		if(player == Black) player = White;
+		else player = Black;
+		turn(ball, board, player);
+	}
+	display(ball.getCurrentBoard(), board.get());
+}
+
+function fallEachTime(ball, board, player) {
+	(function(ball, board, player) {
+		window.setTimeout(function() {
+			fall(ball, board, player);
+			console.log("fall");
+			fallEachTime(ball, board, player);
+		}, 1000);
+	})(ball, board, player);
 }
 
 function display(tmpBoard, masterBoard) {
