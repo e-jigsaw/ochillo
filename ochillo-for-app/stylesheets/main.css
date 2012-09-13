@@ -61,3 +61,13 @@ body {
 .whiteTurn {
 	color: #EEE;
 }
+
+#nav {
+	clear: both;
+}
+
+#resetButton {
+	background: #F03;
+	color: #EEE;
+	font-size: 48px;
+}

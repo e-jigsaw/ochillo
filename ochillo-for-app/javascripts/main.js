@@ -24,9 +24,26 @@ $(document).ready(function() {
      	}
 	});
 
+	$("#resetButton").on("touchstart", function(){
+		if(confirm("本当にリセットしますか？")) {
+			start();
+		}
+	});
+
 	ball.generateBalls(Math.floor(Math.random() * 5));
 	turn(ball, board);
 	fallEachTime(ball, board);
+
+
+	function start() {
+		ball = new ballModel();
+		board = new boardModel();
+		ball.init();
+		board.init();
+		ball.generateBalls(Math.floor(Math.random() * 5));
+		turn(ball, board);
+		fallEachTime(ball, board);
+	}
 });
 
 function init(board) {
