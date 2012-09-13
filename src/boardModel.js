@@ -7,6 +7,7 @@ function boardModel() {
 	var self = this;
 
 	this.state = []; // ボードの状態配列
+	this.currentPlayer = Black;
 
 	this.init = function() {
 		// ボードの状態初期化
@@ -42,17 +43,21 @@ function boardModel() {
 		else return self.state[y][x];
 	}
 
-	this.check = function(x, y, ball) {
-		var queue = [];
-		// 8方向に探索、同じもしくは空、壁だったら探索終了
-		if(self.get(x-1, y-1) == !ball) self.searchBalls(x-1, y-1, ball, 0, queue);
-		if(self.get(x,   y-1) == !ball) self.searchBalls(x,   y-1, ball, 1, queue);
-		if(self.get(x+1, y-1) == !ball) self.searchBalls(x+1, y-1, ball, 2, queue);
-		if(self.get(x-1, y  ) == !ball) self.searchBalls(x-1, y,   ball, 3, queue);
-		if(self.get(x+1, y  ) == !ball) self.searchBalls(x+1, y,   ball, 4, queue);
-		if(self.get(x-1, y+1) == !ball) self.searchBalls(x-1, y+1, ball, 5, queue);
-		if(self.get(x,   y+1) == !ball) self.searchBalls(x,   y+1, ball, 6, queue);
-		if(self.get(x+1, y+1) == !ball) self.searchBalls(x+1, y+1, ball, 7, queue);
+	this.check = function(queue) {
+		var fullQueue = [];
+		var ball = self.getCurrentPlayer();
+		for(var i=0; i<queue.length; i++) {
+			// 8方向に探索、同じもしくは空、壁だったら探索終了
+			if(self.get(queue[i][1]-1, queue[i][0]-1) == !ball) fullQueue.push(self.searchBalls(queue[i][1]-1, queue[i][0]-1, ball, 0, []));
+			if(self.get(queue[i][1],   queue[i][0]-1) == !ball) fullQueue.push(self.searchBalls(queue[i][1],   queue[i][0]-1, ball, 1, []));
+			if(self.get(queue[i][1]+1, queue[i][0]-1) == !ball) fullQueue.push(self.searchBalls(queue[i][1]+1, queue[i][0]-1, ball, 2, []));
+			if(self.get(queue[i][1]-1, queue[i][0]  ) == !ball) fullQueue.push(self.searchBalls(queue[i][1]-1, queue[i][0],   ball, 3, []));
+			if(self.get(queue[i][1]+1, queue[i][0]  ) == !ball) fullQueue.push(self.searchBalls(queue[i][1]+1, queue[i][0],   ball, 4, []));
+			if(self.get(queue[i][1]-1, queue[i][0]+1) == !ball) fullQueue.push(self.searchBalls(queue[i][1]-1, queue[i][0]+1, ball, 5, []));
+			if(self.get(queue[i][1],   queue[i][0]+1) == !ball) fullQueue.push(self.searchBalls(queue[i][1],   queue[i][0]+1, ball, 6, []));
+			if(self.get(queue[i][1]+1, queue[i][0]+1) == !ball) fullQueue.push(self.searchBalls(queue[i][1]+1, queue[i][0]+1, ball, 7, []));
+		}
+		self.reverseBalls(fullQueue, ball);
 	}
 
 	this.searchBalls = function (x, y, ball, flg, queue) {
@@ -62,43 +67,43 @@ function boardModel() {
 		queue.push([x, y]);
 		switch(flg) {
 			case 0:
-				if(     self.get(x-1, y-1) == !ball) arguments.callee(x-1, y-1, ball, 0, queue);
-				else if(self.get(x-1, y-1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x-1, y-1) == !ball) return arguments.callee(x-1, y-1, ball, flg, queue);
+				else if(self.get(x-1, y-1) == ball)  return queue;
 				else return 0;
 				break;
 			case 1:
-				if(     self.get(x,   y-1) == !ball) arguments.callee(x,   y-1, ball, 1, queue);
-				else if(self.get(x,   y-1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x,   y-1) == !ball) return arguments.callee(x,   y-1, ball, flg, queue);
+				else if(self.get(x,   y-1) == ball)  return queue;
 				else return 0;
 				break;
 			case 2:
-				if(     self.get(x+1, y-1) == !ball) arguments.callee(x+1, y-1, ball, 2, queue);
-				else if(self.get(x+1, y-1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x+1, y-1) == !ball) return arguments.callee(x+1, y-1, ball, flg, queue);
+				else if(self.get(x+1, y-1) == ball)  return queue;
 				else return 0;
 				break;
 			case 3:
-				if(     self.get(x-1, y  ) == !ball) arguments.callee(x-1, y  , ball, 3, queue);
-				else if(self.get(x-1, y-1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x-1, y  ) == !ball) return arguments.callee(x-1, y  , ball, flg, queue);
+				else if(self.get(x-1, y  ) == ball)  return queue;
 				else return 0;
 				break;
 			case 4:
-				if(     self.get(x+1, y  ) == !ball) arguments.callee(x+1, y  , ball, 4, queue);
-				else if(self.get(x+1, y  ) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x+1, y  ) == !ball) return arguments.callee(x+1, y  , ball, flg, queue);
+				else if(self.get(x+1, y  ) == ball)  return queue;
 				else return 0;
 				break;
 			case 5:
-				if(     self.get(x-1, y+1) == !ball) arguments.callee(x-1, y+1, ball, 5, queue);
-				else if(self.get(x-1, y+1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x-1, y+1) == !ball) return arguments.callee(x-1, y+1, ball, flg, queue);
+				else if(self.get(x-1, y+1) == ball)  return queue;
 				else return 0;
 				break;
 			case 6:
-				if(     self.get(x,   y+1) == !ball) arguments.callee(x,   y+1, ball, 6, queue);
-				else if(self.get(x,   y+1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x,   y+1) == !ball) return arguments.callee(x,   y+1, ball, flg, queue);
+				else if(self.get(x,   y+1) == ball)  return queue;
 				else return 0;
 				break;
 			case 7:
-				if(     self.get(x+1, y+1) == !ball) arguments.callee(x-1, y-1, ball, 7, queue);
-				else if(self.get(x+1, y+1) == ball)  self.reverseBalls(queue, ball);
+				if(     self.get(x+1, y+1) == !ball) return arguments.callee(x-1, y-1, ball, flg, queue);
+				else if(self.get(x+1, y+1) == ball)  return queue;
 				else return 0;
 				break;
 		}
@@ -106,8 +111,10 @@ function boardModel() {
 
 	this.reverseBalls = function(queue, ball) {
 		// キューをひっくり返す処理
-		for(var i in queue) {
-			self.set(queue[i][0], queue[i][1], ball);
+		for(var i=0; i<queue.length; i++) {
+			for(var j=0; j<queue[i].length; j++) {
+				self.set(queue[i][j][0], queue[i][j][1], ball);
+			}
 		}
 	}
 
@@ -131,6 +138,16 @@ function boardModel() {
 			}
 		}
 		return count;
+	}
+
+	this.getCurrentPlayer = function() {
+		return self.currentPlayer;
+	}
+
+	this.changeCurrentPlayer = function() {
+		if(self.getCurrentPlayer() == Black) self.currentPlayer = White;
+		else self.currentPlayer = Black;
+		return 1;
 	}
 }
 
